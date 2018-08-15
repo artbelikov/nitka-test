@@ -45,15 +45,12 @@ body {
   grid-template-rows: min-content auto;
   grid-template-areas: 'header header' 'room aside';
 }
-
 .room {
   grid-area: room;
 }
-
 .aside {
   grid-area: aside;
 }
-
 .header {
   grid-area: header;
 }
