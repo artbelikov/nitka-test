@@ -1,5 +1,11 @@
 import Vuex from 'vuex';
 
+const formatter = new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUR',
+    minimumFractionDigits: 0,
+});
+
 export default () =>
   new Vuex.Store({
     state: {
@@ -47,11 +53,19 @@ export default () =>
       readableSelectedSeats(state) {
         return Object.values(state.selectedSeats).map(seat => {
           let split = seat.position.split(':');
-          return `row ${split[0]}, seat ${split[1]}`;
+          return `row ${split[0]} seat ${split[1]}`;
         });
       },
       isSelectedSeats(state) {
         return Boolean(Object.keys(state.selectedSeats).length);
+      },
+      totalCost(state) {
+        const total = Object.values(state.selectedSeats)
+          .map(seat => seat.price)
+          .reduce((a, b) => {
+            return a + b;
+          });
+        return `${formatter.format(total)}`;
       },
     },
   });

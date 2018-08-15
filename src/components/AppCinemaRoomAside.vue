@@ -2,7 +2,10 @@
     <div class="cinema-room-aside" v-if="isSelectedSeats">
         <div class="selected-seats">
             <div class="title">Selected seats:</div>
-            <div class="selected-seat-text" v-for="seat in readableSelectedSeats">{{seat}}</div>
+            <span class="selected-seat-text" v-for="seat in readableSelectedSeats">{{seat}}</span>
+        </div>
+        <div class="cinema-room-aside-total-cost">
+            Total cost: {{totalCost}}
         </div>
         <div class="cinema-room-aside-buttons">
             <button class="btn btn-ok" @click="buy">Buy</button>
@@ -17,7 +20,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'AppCinemaRoomAside',
   computed: {
-    ...mapGetters(['readableSelectedSeats', 'isSelectedSeats']),
+    ...mapGetters(['readableSelectedSeats', 'isSelectedSeats', 'totalCost']),
   },
   methods: {
     buy() {
@@ -39,8 +42,17 @@ export default {
   justify-content: space-between;
   height: 100%;
   &-buttons {
+    margin-top: 20px;
     .btn-ok {
       margin-right: 20px;
+    }
+  }
+  &-total-cost {
+    margin-top: auto;
+  }
+  .selected-seat-text + .selected-seat-text {
+    &:before {
+      content: ', ';
     }
   }
 }

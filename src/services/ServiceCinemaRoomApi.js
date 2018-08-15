@@ -25,6 +25,7 @@ class CinemaRoomApi {
             .slice(3),
           position,
           selected: false,
+          price: 100,
         };
       }
     }
